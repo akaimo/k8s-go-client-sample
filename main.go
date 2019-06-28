@@ -23,6 +23,17 @@ func main() {
 	for _, pod := range pods.Items {
 		fmt.Println(pod.Name)
 	}
+	fmt.Println()
+
+	pods, err = client.CoreV1().Pods("").List(meta_v1.ListOptions{LabelSelector: "job-name=pi"})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	for _, pod := range pods.Items {
+		fmt.Println(pod.Name)
+	}
+	fmt.Println()
 }
 
 func newClient() (kubernetes.Interface, error) {
