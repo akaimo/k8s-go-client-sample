@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	app_v1 "k8s.io/api/apps/v1"
-	"k8s.io/apimachinery/pkg/util/yaml"
 	"log"
 	"os"
 
+	app_v1 "k8s.io/api/apps/v1"
 	api_v1 "k8s.io/api/core/v1"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 )
