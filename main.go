@@ -34,6 +34,12 @@ func main() {
 		fmt.Println(pod.Name)
 	}
 	fmt.Println()
+
+	job, err := client.BatchV1().Jobs("default").Get("pi", meta_v1.GetOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(job.Name)
 }
 
 func newClient() (kubernetes.Interface, error) {
