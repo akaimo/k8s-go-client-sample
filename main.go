@@ -39,7 +39,7 @@ func main() {
 	}
 	fmt.Println()
 
-	job, err := client.BatchV1().Jobs("default").Get("pi", meta_v1.GetOptions{})
+	job, err := client.BatchV1().Jobs(api_v1.NamespaceDefault).Get("pi", meta_v1.GetOptions{})
 	if err != nil {
 		log.Fatal(err)
 	}
