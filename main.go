@@ -60,7 +60,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(result)
+	fmt.Println(result.Name)
+	fmt.Println(result.Spec.Template.Spec.Containers[0].Name)
 }
 
 func newClient() (kubernetes.Interface, error) {
