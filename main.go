@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	app_v1 "k8s.io/api/apps/v1"
+	"k8s.io/apimachinery/pkg/util/yaml"
 	"log"
+	"os"
 
+	api_v1 "k8s.io/api/core/v1"
 	meta_v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -40,6 +44,23 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println(job.Name)
+	fmt.Println()
+
+	f, err := os.Open("sample.yaml")
+	if err != nil {
+		log.Fatal(err)
+	}
+	deployment := &app_v1.Deployment{}
+	err = yaml.NewYAMLOrJSONDecoder(f, 4096).Decode(deployment)
+	if err != nil {
+		log.Fatal(err)
+	}
+	deploymentsClient := client.AppsV1().Deployments(api_v1.NamespaceDefault)
+	result, err := deploymentsClient.Create(deployment)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(result)
 }
 
 func newClient() (kubernetes.Interface, error) {
