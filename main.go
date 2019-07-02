@@ -62,6 +62,13 @@ func main() {
 	}
 	fmt.Println(result.Name)
 	fmt.Println(result.Spec.Template.Spec.Containers[0].Name)
+	fmt.Println()
+
+	err = deploymentsClient.Delete(result.Name, &meta_v1.DeleteOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println("Deleted deployment.")
 }
 
 func newClient() (kubernetes.Interface, error) {
